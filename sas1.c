@@ -22,12 +22,12 @@ typedef struct
     char descriptions[100];
 } produit;
 
-int x = 0;
+
 int choix;
 int choix_saisie, choix3;
 void menu()
 {
-    printf("=== SYSTE1ME D'ACHAT CLIENT ===");
+    printf("\n=== SYSTE1ME D'ACHAT CLIENT ===");
     printf("\n1 Gestion du profil client\n");
     printf("2 Gestion du solde virtuel\n");
     printf("3  Consultation des produits\n");
@@ -75,7 +75,7 @@ void creationProfil()
     printf("===informations du client====\n");
     printf("saisir le nom:\n");
     scanf("%s", client.nom);
-    printf("saisir le prenom\n");
+    printf("saisir le prenom: \n");
     scanf("%s", client.prenom);
     client.idclient = idclient;
     idclient++;
@@ -83,14 +83,14 @@ void creationProfil()
 }
 void modifierProfil()
 {
-    printf("entrer le nouveau nom:\n");
+    printf("\nentrer le nouveau nom:\n");
     scanf("%s", client.nom);
     printf("entrer le nouveau prenom");
     scanf("%s", client.prenom);
 }
 void afficherProfil()
 {
-    printf("===informations du client====\n");
+    printf("\n===informations du client====\n");
     printf("ID: %d\n", client.idclient);
     printf("nom: %s\n", client.nom);
     printf("prenom: %s\n", client.prenom);
@@ -102,7 +102,7 @@ void afficherSolde()
 {
     float solde_dispo = 0;
 
-    printf("mantant diponible:%.2f+ %fDH", solde_dispo + client.solde);
+    printf("mantant diponible:%.2fDH",  client.solde);
 }
 void depotArgent()
 {
@@ -140,12 +140,12 @@ int rechercherProduit_Nom(){
 void rechercherProduit_categorie(){
     char categorieRech[50];
     int found=0, i;
-    printf("saisir la categorie que vous rechercher: ");
+    printf("saisir la categorie que vous rechercher:\n ");
     scanf("%s",&categorieRech);
     for(i=0; i<4; i++){
     if(!strcasecmp(categorieRech,listP[i].categorie))
-   { printf("%d\n",listP[i].idProduit);
-    printf("%d\n",listP[i].stock);
+   { printf("ID :%d\n",listP[i].idProduit);
+    printf("stock: %d\n",listP[i].stock);
     printf("%s\n",listP[i].nom);
     printf("%f\n",listP[i].prix);
     printf("%s\n",listP[i].categorie);
@@ -223,11 +223,11 @@ int main()
         case 1:
             do
             {
-                printf("===gestion de profil===");
+                printf("\n===gestion de profil===");
                 printf("\n1.Creation de Profil\n");
                 printf("2.Modification de Profil\n");
                 printf("3.Affichage de profile\n");
-                printf("0.Retour au menu\n");
+                printf("0. Gestion du solde\n");
                 printf("entrer votre choix:\n");
                 scanf("%d", &choix_saisie);
 
@@ -244,21 +244,21 @@ int main()
                     case 3:
                         afficherProfil();
                         break;
-                    default:
-                        printf("choix indisponible");
+                    case 0 :
+                        
                         break;
                     } while (choix_saisie != 0);
                 }
-            } while (choix_saisie != 0);
+            } while (choix_saisie > 0);
 
         case 2:
             do
             {
-                printf("===gestion solde===");
+                printf("\n===gestion solde===");
                 printf("\n1.afficher solde\n");
                 printf("2.depot d'argents\n");
+                 printf("0 gestion produit\n");
                 printf("entrer votre choix:\n");
-                printf("0 retour au menu");
                 scanf("%d", &choix_saisie);
 
                 switch (choix_saisie)
@@ -270,7 +270,7 @@ int main()
                     depotArgent();
                     break;
                 default:
-                    printf("indisponible");
+                    //ACHAT
                     break;
                 }
             } while (choix_saisie != 0);
@@ -308,6 +308,8 @@ int main()
         case 4 :
         selectionProduit();
         break;
+        case 5 :
+        statistiques();
         
         default:
         
